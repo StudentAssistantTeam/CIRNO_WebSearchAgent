@@ -7,8 +7,14 @@ ENV_FILE_PATH = BASE_DIR / "cirno_math_and_science_agent.env"
 
 # Settings
 class Settings(BaseSettings):
-    # mcp_config
+    # mcp config
     mcp_url: str = ""
+    # llm config
+    llm_api_key: str = ""
+    llm_model_name: str = ""
+    llm_base_url: str = ""
+    # Exa config
+    exa_api_key: str = ""
 
     model_config = SettingsConfigDict(
         env_file=ENV_FILE_PATH,

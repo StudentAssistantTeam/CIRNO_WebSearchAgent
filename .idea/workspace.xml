@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="56b8a329-592a-499c-bcab-d09e1f8aae3e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/cirno_web_search_agent/cirno_web_search_agent/agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cirno_web_search_agent/.idea/cirno_web_search_agent.iml" beforeDir="false" afterPath="$PROJECT_DIR$/cirno_web_search_agent/.idea/cirno_web_search_agent.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cirno_web_search_agent/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cirno_web_search_agent/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cirno_web_search_agent/cirno_web_search_agent/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/cirno_web_search_agent/cirno_web_search_agent/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cirno_web_search_agent/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/cirno_web_search_agent/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cirno_web_search_agent/uv.lock" beforeDir="false" afterPath="$PROJECT_DIR$/cirno_web_search_agent/uv.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "1Vewton"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/StudentAssistantTeam/CIRNO_WebSearchAgent.git",
+    "accountId": "05e161a7-38d3-46b1-9403-67808e900949"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="3B0tZutEz4ULHqnGVteL3V5j1WY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-4762d8aabb82-6d6dccd035ac-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.30387.173" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="56b8a329-592a-499c-bcab-d09e1f8aae3e" name="Changes" comment="" />
+      <created>1773637874569</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1773637874569</updated>
+    </task>
+    <servers />
+  </component>
+</project>
