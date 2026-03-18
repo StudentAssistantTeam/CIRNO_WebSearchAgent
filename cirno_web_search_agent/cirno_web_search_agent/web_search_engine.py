@@ -1,10 +1,10 @@
 import logging
 import asyncio
+from typing import List
 # Project dependency
 from cirno_web_search_agent.config import settings
 from cirno_web_search_agent.prompt import (
-    websearch_return_schema,
-    websearch_exa_agent_system_prompt
+    websearch_return_schema
 )
 # Exa dependency
 from exa_py import AsyncExa
@@ -22,7 +22,10 @@ class WebSearchEngine():
         self.schema = websearch_return_schema
 
     # Search
-    async def search(self, query: str):
+    async def search(self, keywords: List[str]):
+        # Process query
+        query = " ".join(keywords)
+        # Get result
         results = await self.exa.search(
             query=query,
             type="deep",
@@ -35,9 +38,9 @@ class WebSearchEngine():
             },
             num_results=5
         )
-        return results
+        return results.results
 
 
 if __name__ == "__main__":
     engine = WebSearchEngine()
-    print(asyncio.get_event_loop().run_until_complete(engine.search("climate tech news")))
+    print(asyncio.get_event_loop().run_until_complete(engine.search(["technology", "news", "climate"])))
