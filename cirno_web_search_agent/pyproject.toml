@@ -5,6 +5,7 @@ description = "The web searching agent for CIRNO multiagent system"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "asyncio>=4.0.0",
     "exa-py>=2.9.0",
     "langchain>=1.2.12",
     "langchain-mcp-adapters>=0.2.1",

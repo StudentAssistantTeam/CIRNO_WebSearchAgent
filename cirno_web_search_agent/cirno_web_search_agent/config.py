@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_FILE_PATH = BASE_DIR / "cirno_math_and_science_agent.env"
+ENV_FILE_PATH = BASE_DIR / "cirno_web_search_agent.env"
 
 
 # Settings
