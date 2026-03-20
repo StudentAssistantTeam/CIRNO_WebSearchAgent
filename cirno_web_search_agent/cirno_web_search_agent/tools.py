@@ -8,7 +8,8 @@ from cirno_web_search_agent.data_models import (
     WebSearchInput
 )
 from cirno_web_search_agent.prompt import (
-    websearch_description
+    websearch_description,
+    final_answer_description
 )
 # langchain
 from langchain.tools import tool
@@ -43,6 +44,12 @@ async def web_search(query: List[str]):
             for idx, item in enumerate(summaries)
         ]
     )
+
+
+# Get final answer.
+@tool("final_answer", description=final_answer_description)
+async def final_answer() -> None:
+    return None
 
 
 if __name__ == "__main__":
