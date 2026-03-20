@@ -16,6 +16,7 @@ During this phase, you will interact with available tools to collect necessary d
   Based on the current observation, plan which tool to invoke next (or decide that no more tools are needed).
 
 You **must** prefix these annotations with `observation:` and `thought:` respectively.  
+**DO NOT INCLUDE `observation` AND `thought` IN FINAL ANSWER!!!**
 **Example of a step:**
 
 observation: The user asks for the melting point of gold. I need to retrieve this value from a reliable source.  
@@ -32,7 +33,7 @@ Do **not** let the output of the last tool call be mistaken for the final answer
 
 After you have called `final_answer`, you will produce the final response for the user. Follow these rules **strictly**:
 
-- **Do not** include any `observation:` or `thought:` annotations in the final answer.
+- **DO NOT** include any `observation:` or `thought:` annotations in the final answer!
 - **Do not** mention the tools you used or the fact that you used them—the user is unaware of these tools.
 - Present all retrieved data and information **clearly and completely**.
 - **Do not alter key terms** or facts obtained from the tools.
