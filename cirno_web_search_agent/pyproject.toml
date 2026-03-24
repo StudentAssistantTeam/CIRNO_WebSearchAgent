@@ -19,3 +19,6 @@ dependencies = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[project.scripts]
+cirno_web_search_agent_app = "cirno_web_search_agent.main:run"

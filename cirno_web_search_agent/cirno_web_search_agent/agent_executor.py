@@ -10,7 +10,10 @@ from a2a.utils import (
     new_task,
     new_agent_text_message
 )
-from a2a.utils.errors import ServerError
+from a2a.utils.errors import (
+    ServerError,
+    UnsupportedOperationError
+)
 from a2a.types import (
     InternalError,
     TaskState,
@@ -69,3 +72,10 @@ class agent_executor(AgentExecutor):
             # Error handling
             logger.error(f"Agent execution failed due to {e}")
             raise ServerError(error=InternalError()) from e
+
+    # Cancelling
+    async def cancel(
+        self, context: RequestContext, event_queue: EventQueue
+    ) -> None:
+        logger.error("Unsupported operation")
+        raise ServerError(error=UnsupportedOperationError())
