@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  cirno_web_search_agent:
+    build:
+      context: ./cirno_web_search_agent
+      dockerfile: Dockerfile
+      args:
+        MIRROR: https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+    ports:
+      - "4002:4002"
+    env_file:
+      - ./cirno_web_search_agent/cirno_web_search_agent.env
+    container_name: cirno_web_search_agent
+    restart: always
+    depends_on:
+      data-commons-mcp:
+        condition: service_started
+  
+  data-commons-mcp:
+    build:
+      context: ./mcp
+      dockerfile: Dockerfile
+    ports:
+      - "50055:50055"
+    env_file:
+      - ./mcp/.env
+    container_name: data-commons-mcp
+    restart: always

@@ -1,5 +1,5 @@
 # python server
-FROM docker.1ms.run/python:3.13
+FROM python:3.13
 
 # Install uv
 RUN pip install uv -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
