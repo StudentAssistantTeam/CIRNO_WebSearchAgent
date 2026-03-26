@@ -13,6 +13,8 @@ from cirno_web_search_agent.data_models import StreamingMessage
 import cirno_web_search_agent.logger_config as logger_config
 
 logger = logging.getLogger("agent")
+# Supported content type for transmission
+SUPPORTED_CONTENT_TYPES = ['text', 'text/plain']
 
 
 # Agent
@@ -114,4 +116,3 @@ if __name__ == "__main__":
 
 
     asyncio.run(itering())
-

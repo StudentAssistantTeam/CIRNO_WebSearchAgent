@@ -46,6 +46,9 @@ After you have called `final_answer`, you will produce the final response for th
 
 Remember: Your goal is to provide accurate, well‑structured, and user‑friendly answers while invisibly handling the tool‑calling process behind the scenes. The final answer should be self‑contained and directly address the user’s query.
 """
+agent_description = """
+This agent can search in the internet or data commons to get the statistic or simple facts and return it in the answer to you.
+"""
 # tools
 # Web Search Tool
 websearch_return_schema = {
@@ -83,6 +86,9 @@ The tool that can find you the info you needed in the internet.
 - The content of the webpages is summarized by a llm when calling this tool. 
 - The tool would return the summary of the webpages and the url. 
 - **YOU MUST ADD THE UTL REFERENCE IN YOUR RESULT IF YOU USE THE INFO FETCHED BY THIS TOOL. NOTE THAT THE URL WOULD BE RETURNED WITH SUMMARY TO YOU AFTER CALLING THIS TOOL.**
+"""
+web_search_skill_description = """
+Search in the internet to find the information you want to know.
 """
 # Final answer
 final_answer_description = """
