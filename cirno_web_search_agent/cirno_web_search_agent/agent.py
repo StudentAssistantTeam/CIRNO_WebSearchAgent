@@ -24,7 +24,7 @@ class agent:
         self.llm = ChatOpenAI(
             model=settings.llm_model_name,
             api_key=settings.llm_api_key,
-            base_url=settings.llm_base_url
+            base_url=settings.llm_base_url,
         )
         # MCP client
         self.mcp_client = None
@@ -39,16 +39,21 @@ class agent:
         async with self.asyncio_lock:
             if self.initialized:
                 return
-            self.mcp_client = MultiServerMCPClient(
-                {
-                    "data_commons": {
-                        "url": settings.mcp_url,
-                        "transport": "streamable-http"
+            try:
+                self.mcp_client = MultiServerMCPClient(
+                    {
+                        "data_commons": {
+                            "url": settings.mcp_url,
+                            "transport": "streamable-http",
+                            "timeout": 60
+                        }
                     }
-                }
-            )
-            # Get llm tools from mcp
-            tools = await self.mcp_client.get_tools()
+                )
+                # Get llm tools from mcp
+                tools = await self.mcp_client.get_tools()
+            except:
+                logger.info("Cannot find mcp server")
+                tools = []
             # Add web search tool
             tools.append(web_search)
             tools.append(final_answer)
@@ -56,7 +61,7 @@ class agent:
                 self.llm,
                 tools,
                 system_prompt=agent_system_prompt,
-                checkpointer=MemorySaver(),
+                checkpointer=MemorySaver()
             )
             logger.info("Agent initialization finished")
             self.initialized = True
@@ -91,10 +96,10 @@ class agent:
             async for chunk in self.agent.astream(chat_history, config=config):
                 for step, data in chunk.items():
                     if step=="model":
-                        final_content = data['messages'][-1].content
+                        final_content = data['messages'][0].content
                     yield StreamingMessage(
                         step=step,
-                        content=data['messages'][-1].content,
+                        content=data['messages'][0].content,
                         done=False
                     )
             yield StreamingMessage(

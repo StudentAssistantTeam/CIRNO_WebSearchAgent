@@ -13,9 +13,6 @@ services:
       - ./cirno_web_search_agent/cirno_web_search_agent.env
     container_name: cirno_web_search_agent
     restart: always
-    depends_on:
-      data-commons-mcp:
-        condition: service_started
   
   data-commons-mcp:
     build:
