@@ -75,7 +75,7 @@ class agent:
         try:
             # Configuration
             config = {'configurable': {'thread_id': context_id}}
-            # Settting messages
+            # Setting messages
             messages = []
             messages.append(HumanMessage(content=prompt))
             chat_history = {
@@ -83,7 +83,7 @@ class agent:
             }
             # Response record
             response_record = []
-            async for chunk in self.agent.astream(chat_history):
+            async for chunk in self.agent.astream(chat_history, config=config):
                 for step, data in chunk.items():
                     if step=="model":
                         response_record.append(data['messages'][0].content)
