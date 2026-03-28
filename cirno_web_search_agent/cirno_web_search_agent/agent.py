@@ -16,7 +16,8 @@ import cirno_web_search_agent.logger_config as logger_config
 logger = logging.getLogger("agent")
 # Supported content type for transmission
 SUPPORTED_CONTENT_TYPES = ['text', 'text/plain']
-
+# Memory
+memory = MemorySaver()
 
 # Agent
 class agent:
@@ -28,33 +29,39 @@ class agent:
             base_url=settings.llm_base_url
         )
         # MCP client
-        self.mcp_client = MultiServerMCPClient(
-            {
-                "data_commons": {
-                    "url": settings.mcp_url,
-                    "transport": "streamable-http"
-                }
-            }
-        )
-        # Memory saver
-        self.memory = MemorySaver()
+        self.mcp_client = None
         # Agent
         self.agent = None
+        # Initialization management
+        self.asyncio_lock = asyncio.Lock()
+        self.initialized = False
 
     # Agent initialization
     async def initialize(self):
-        # Get llm tools from mcp
-        tools = await self.mcp_client.get_tools()
-        # Add web search tool
-        tools.append(web_search)
-        tools.append(final_answer)
-        self.agent = create_agent(
-            self.llm,
-            tools,
-            system_prompt=agent_system_prompt,
-            checkpointer=self.memory
-        )
-        logger.info("Agent initialization finished")
+        async with self.asyncio_lock:
+            if self.initialized:
+                return
+            self.mcp_client = MultiServerMCPClient(
+                {
+                    "data_commons": {
+                        "url": settings.mcp_url,
+                        "transport": "streamable-http"
+                    }
+                }
+            )
+            # Get llm tools from mcp
+            tools = await self.mcp_client.get_tools()
+            # Add web search tool
+            tools.append(web_search)
+            tools.append(final_answer)
+            self.agent = create_agent(
+                self.llm,
+                tools,
+                system_prompt=agent_system_prompt,
+                checkpointer=memory
+            )
+            logger.info("Agent initialization finished")
+            self.initialized = True
 
     # Test invoke
     async def test_invoke(self, prompt: str):
@@ -82,19 +89,19 @@ class agent:
                 "messages": messages
             }
             # Response record
-            response_record = []
+            final_content = ""
             async for chunk in self.agent.astream(chat_history, config=config):
                 for step, data in chunk.items():
                     if step=="model":
-                        response_record.append(data['messages'][0].content)
+                        final_content = data['messages'][-1].content
                     yield StreamingMessage(
                         step=step,
-                        content=data['messages'][0].content,
+                        content=data['messages'][-1].content,
                         done=False
                     )
             yield StreamingMessage(
                 step="finish",
-                content=response_record[len(response_record)-1],
+                content=final_content,
                 done=True
             )
         except Exception as e:

@@ -24,12 +24,13 @@ from a2a.types import (
 from cirno_web_search_agent.agent import agent
 
 logger = logging.getLogger("agent executor")
+agent_instance = agent()
 
 
 # Agent Executor
 class agent_executor(AgentExecutor):
     def __init__(self):
-        self.agent = agent()
+        self.agent = agent_instance
 
     # Agent Execution
     async def execute(
@@ -45,13 +46,15 @@ class agent_executor(AgentExecutor):
         # updater
         updater = TaskUpdater(event_queue, task.id, task.context_id)
         try:
-            # Agent initialization: Connect to the mcp
+            # initialization
             await self.agent.initialize()
             # Streaming
             async for chunk in self.agent.streaming(query, task.context_id):
                 # check whether it is done
                 is_done = chunk.done
                 if not is_done:
+                    if chunk.step != "model":
+                        continue
                     # Updating task
                     await updater.update_status(
                         TaskState.working,

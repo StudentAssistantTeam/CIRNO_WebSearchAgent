@@ -29,6 +29,8 @@ from cirno_web_search_agent.agent_executor import agent_executor
 
 # logger
 logger = logging.getLogger("server")
+# Executor instance
+executor_instance = agent_executor()
 
 
 def main():
@@ -89,7 +91,7 @@ def main():
     else:
         task_store = InMemoryTaskStore()
     request_handler = DefaultRequestHandler(
-        agent_executor=agent_executor(),
+        agent_executor=executor_instance,
         task_store=task_store,
         push_config_store=push_config_store,
         push_sender=push_sender
