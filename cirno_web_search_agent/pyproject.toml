@@ -13,6 +13,7 @@ dependencies = [
     "langchain>=1.2.12",
     "langchain-mcp-adapters>=0.2.1",
     "langchain-openai>=1.1.11",
+    "langgraph>=1.1.2",
     "pydantic>=2.12.5",
     "pydantic-settings>=2.13.1",
     "uvicorn>=0.41.0",

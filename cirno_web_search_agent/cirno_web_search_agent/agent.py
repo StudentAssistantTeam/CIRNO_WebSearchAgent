@@ -4,7 +4,8 @@ import asyncio
 from langchain_openai import ChatOpenAI
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain.agents import create_agent
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.messages import HumanMessage
+from langgraph.checkpoint.memory import MemorySaver
 # Project dependencies
 from cirno_web_search_agent.config import settings
 from cirno_web_search_agent.tools import web_search, final_answer
@@ -35,6 +36,8 @@ class agent:
                 }
             }
         )
+        # Memory saver
+        self.memory = MemorySaver()
         # Agent
         self.agent = None
 
@@ -45,7 +48,12 @@ class agent:
         # Add web search tool
         tools.append(web_search)
         tools.append(final_answer)
-        self.agent = create_agent(self.llm, tools)
+        self.agent = create_agent(
+            self.llm,
+            tools,
+            system_prompt=agent_system_prompt,
+            checkpointer=self.memory
+        )
         logger.info("Agent initialization finished")
 
     # Test invoke
@@ -53,7 +61,6 @@ class agent:
         logger.info("Start testing")
         # Load Messages history
         messages = []
-        messages.append(SystemMessage(content=agent_system_prompt))
         messages.append(HumanMessage(content=prompt))
         chat_history = {
             "messages": messages
@@ -70,7 +77,6 @@ class agent:
             config = {'configurable': {'thread_id': context_id}}
             # Settting messages
             messages = []
-            messages.append(SystemMessage(content=agent_system_prompt))
             messages.append(HumanMessage(content=prompt))
             chat_history = {
                 "messages": messages
