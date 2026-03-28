@@ -54,6 +54,15 @@ def main():
             "Find me the definition of GDP."
         ]
     )
+    multiple_questions_understanding = AgentSkill(
+        id="multiple_questions_understanding",
+        name="Multiple Questions Understanding Ability",
+        description="This agent is able to understand complex questions",
+        tags=["information", "questions"],
+        examples=[
+            "What is the definition of GDP and the GDP data of the countries."
+        ]
+    )
     # Agent capabilities
     capabilities = AgentCapabilities(
         streaming=True
@@ -69,7 +78,8 @@ def main():
         capabilities=capabilities,
         skills=[
             web_search_skill,
-            data_commons_skill
+            data_commons_skill,
+            multiple_questions_understanding
         ]
     )
     # Server
