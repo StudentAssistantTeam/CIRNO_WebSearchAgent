@@ -16,8 +16,6 @@ import cirno_web_search_agent.logger_config as logger_config
 logger = logging.getLogger("agent")
 # Supported content type for transmission
 SUPPORTED_CONTENT_TYPES = ['text', 'text/plain']
-# Memory
-memory = MemorySaver()
 
 # Agent
 class agent:
@@ -58,7 +56,7 @@ class agent:
                 self.llm,
                 tools,
                 system_prompt=agent_system_prompt,
-                checkpointer=memory
+                checkpointer=MemorySaver(),
             )
             logger.info("Agent initialization finished")
             self.initialized = True
