@@ -58,7 +58,7 @@ def main():
     )
     # Agent Card
     agent_card = AgentCard(
-        name="Web Search & Data Collection Agent",
+        name="web_search_agent",
         description=agent_description,
         url=f"http://{settings.a2a_host}:{settings.a2a_port}/",
         version="0.1.0",
